@@ -1,0 +1,2175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.zon.pt/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://www.zon.pt/AbstractTypes" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.zon.pt/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.zon.pt/">
+      <s:element name="GetCodeVersion">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCodeVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCodeVersionResult" type="tns:GetCodeVersionResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetCodeVersionResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ProjectName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Branch" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Revision" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetClientHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="startTime" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="endTime" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="maxChanges" nillable="true" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClientHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientHistoryResult" type="tns:GetClientHistoryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetClientHistoryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Transactions" type="tns:ArrayOfHistoryTransactions" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastTransactionTime" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="EOF" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UserManagementResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ResultStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ResultStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHistoryTransactions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HistoryTransactions" nillable="true" type="tns:HistoryTransactions" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HistoryTransactions">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Timestamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Changes" type="tns:ArrayOfHistoryChanges" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHistoryChanges">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="HistoryChanges" nillable="true" type="tns:HistoryChanges" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HistoryChanges">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Action" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NewValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OldValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubChanges" type="tns:ArrayOfHistoryChanges" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QueryUserAuthentication">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryUserAuthenticationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryUserAuthenticationResult" type="tns:QueryUserAuthenticationResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryUserAuthenticationResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="AuthenticationMethod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastIP" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastLoginTimestamp" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastLocationCountry" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastLocationCity" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastLocationZipCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastLocationAddress" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="KeepAlive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KeepAliveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KeepAliveResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OpenSession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="application" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="federatedSessionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ipAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OpenSessionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OpenSessionResult" type="tns:OpenSessionResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OpenSessionResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SessionId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ClientAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ServiceAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Profile" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FeatureList" type="tns:ArrayOfString" />
+              <s:element minOccurs="0" maxOccurs="1" name="AttributeList" type="tns:ArrayOfAttributeValue" />
+              <s:element minOccurs="0" maxOccurs="1" name="LocationAddress" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LocationCountry" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LocationCity" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LocationZip" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAttributeValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AttributeValue" nillable="true" type="tns:AttributeValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AttributeValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReuseSession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="application" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parentSessionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ipAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReuseSessionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReuseSessionResult" type="tns:OpenSessionResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserDataResult" type="tns:GetUserDataResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetUserDataResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ApplicationInfoList" type="tns:ArrayOfApplicationInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="ClientAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ServiceAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AuthenticationMethod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AttributeList" type="tns:ArrayOfAttributeValue" />
+              <s:element minOccurs="0" maxOccurs="1" name="GroupList" type="tns:ArrayOfString" />
+              <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="QuarentineTimeout" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="QuarentineMotive" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ExistsInAD" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfApplicationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ApplicationInfo" nillable="true" type="tns:ApplicationInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ApplicationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Application" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Profile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FeatureList" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAccountData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountDataResult" type="tns:GetAccountDataResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetAccountDataResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserList" type="tns:ArrayOfUserData" />
+              <s:element minOccurs="0" maxOccurs="1" name="ServiceAccountList" type="tns:ArrayOfString" />
+              <s:element minOccurs="0" maxOccurs="1" name="ClientAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AttributeList" type="tns:ArrayOfAttributeValue" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserData" nillable="true" type="tns:UserData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApplicationInfoList" type="tns:ArrayOfApplicationInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClientAccount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceAccount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AuthenticationMethod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AttributeList" type="tns:ArrayOfAttributeValue" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupList" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuarentineTimeout" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuarentineMotive" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExistsInAD" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSessionData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSessionDataResult" type="tns:GetSessionDataResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetSessionDataResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Application" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ClientAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ServiceAcccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Profile" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FeatureList" type="tns:ArrayOfString" />
+              <s:element minOccurs="0" maxOccurs="1" name="AttributeList" type="tns:ArrayOfAttributeValue" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="CloseSession">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloseSessionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CloseSessionResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttributeValues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="attributeMask" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAttributeValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAttributeValuesResult" type="tns:GetAttributeValuesResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetAttributeValuesResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="AttributeList" type="tns:ArrayOfAttributeValue" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="CreateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="clientAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serviceAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="attributeList" type="tns:ArrayOfAttributeValue" />
+            <s:element minOccurs="0" maxOccurs="1" name="activationToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateUserResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateUserEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="clientAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serviceAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="activationToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="application" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="profile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="attributeList" type="tns:ArrayOfAttributeValue" />
+            <s:element minOccurs="0" maxOccurs="1" name="disableFeatureList" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="deleteUserId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateUserExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateUserExResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUserStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="forAccountNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="setDisabled" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="enableUser" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="setQuarentine" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="quarentineTimeout" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="quarentineMotive" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUserStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetUserStatusResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUserAccounts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="forAccountNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="changeClientAccount" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="clientAccount" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="changeServiceAccount" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="serviceAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUserAccountsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetUserAccountsResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="forAccountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="changeAttributeList" type="tns:ArrayOfAttributeValue" />
+            <s:element minOccurs="0" maxOccurs="1" name="removeAttributeList" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateAccountResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newUserId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="authenticationMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="changeAttributeList" type="tns:ArrayOfAttributeValue" />
+            <s:element minOccurs="0" maxOccurs="1" name="removeAttributeList" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateUserResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GrantApplicationProfile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="application" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="profile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="package" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="attributeList" type="tns:ArrayOfAttributeValue" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GrantApplicationProfileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GrantApplicationProfileResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RevokeApplicationProfile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="forAccountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="application" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RevokeApplicationProfileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RevokeApplicationProfileResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetApplicationFeature">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="application" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="enableFeatureList" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="disableFeatureList" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetApplicationFeatureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetApplicationFeatureResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRules">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="application" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="transactionType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRulesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRulesResult" type="tns:GetRulesResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetRulesResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="RuleList" type="tns:ArrayOfString" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SetUserGroups">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="addGroupList" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="removeGroupList" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUserGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetUserGroupsResult" type="tns:UserManagementResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGroupData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="groupID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGroupDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGroupDataResult" type="tns:GetGroupDataResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetGroupDataResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserList" type="tns:ArrayOfString" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ActivateUserByToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActivateUserByTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ActivateUserByTokenResult" type="tns:ActivateUserByTokenResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActivateUserByTokenResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetReferenceData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dataType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="application" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="profile" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReferenceDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReferenceDataResult" type="tns:GetReferenceDataResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetReferenceDataResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:UserManagementResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:ArrayOfReferenceData" />
+              <s:element minOccurs="0" maxOccurs="1" name="Categories" type="tns:ArrayOfCategory" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfReferenceData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReferenceData" nillable="true" type="tns:ReferenceData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReferenceData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCategory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Category" nillable="true" type="tns:Category" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Category">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:ArrayOfReferenceData" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCodeVersionResult" nillable="true" type="tns:GetCodeVersionResult" />
+      <s:element name="QueryUserAuthenticationResult" nillable="true" type="tns:QueryUserAuthenticationResult" />
+      <s:element name="UserManagementResult" nillable="true" type="tns:UserManagementResult" />
+      <s:element name="OpenSessionResult" nillable="true" type="tns:OpenSessionResult" />
+      <s:element name="GetUserDataResult" nillable="true" type="tns:GetUserDataResult" />
+      <s:element name="GetAccountDataResult" nillable="true" type="tns:GetAccountDataResult" />
+      <s:element name="GetSessionDataResult" nillable="true" type="tns:GetSessionDataResult" />
+      <s:element name="GetAttributeValuesResult" nillable="true" type="tns:GetAttributeValuesResult" />
+      <s:element name="GetRulesResult" nillable="true" type="tns:GetRulesResult" />
+      <s:element name="GetGroupDataResult" nillable="true" type="tns:GetGroupDataResult" />
+      <s:element name="ActivateUserByTokenResult" nillable="true" type="tns:ActivateUserByTokenResult" />
+      <s:element name="GetReferenceDataResult" nillable="true" type="tns:GetReferenceDataResult" />
+    </s:schema>
+    <s:schema targetNamespace="http://www.zon.pt/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCodeVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCodeVersion" />
+  </wsdl:message>
+  <wsdl:message name="GetCodeVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCodeVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClientHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetClientHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetClientHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAuthenticationSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryUserAuthentication" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAuthenticationSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryUserAuthenticationResponse" />
+  </wsdl:message>
+  <wsdl:message name="KeepAliveSoapIn">
+    <wsdl:part name="parameters" element="tns:KeepAlive" />
+  </wsdl:message>
+  <wsdl:message name="KeepAliveSoapOut">
+    <wsdl:part name="parameters" element="tns:KeepAliveResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:OpenSession" />
+  </wsdl:message>
+  <wsdl:message name="OpenSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:OpenSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReuseSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:ReuseSession" />
+  </wsdl:message>
+  <wsdl:message name="ReuseSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:ReuseSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserData" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountData" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSessionData" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSessionDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloseSessionSoapIn">
+    <wsdl:part name="parameters" element="tns:CloseSession" />
+  </wsdl:message>
+  <wsdl:message name="CloseSessionSoapOut">
+    <wsdl:part name="parameters" element="tns:CloseSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAttributeValuesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAttributeValues" />
+  </wsdl:message>
+  <wsdl:message name="GetAttributeValuesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAttributeValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserExSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateUserEx" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserExSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateUserExResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetUserStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:SetUserStatus" />
+  </wsdl:message>
+  <wsdl:message name="SetUserStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:SetUserStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetUserAccountsSoapIn">
+    <wsdl:part name="parameters" element="tns:SetUserAccounts" />
+  </wsdl:message>
+  <wsdl:message name="SetUserAccountsSoapOut">
+    <wsdl:part name="parameters" element="tns:SetUserAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAccount" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GrantApplicationProfileSoapIn">
+    <wsdl:part name="parameters" element="tns:GrantApplicationProfile" />
+  </wsdl:message>
+  <wsdl:message name="GrantApplicationProfileSoapOut">
+    <wsdl:part name="parameters" element="tns:GrantApplicationProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="RevokeApplicationProfileSoapIn">
+    <wsdl:part name="parameters" element="tns:RevokeApplicationProfile" />
+  </wsdl:message>
+  <wsdl:message name="RevokeApplicationProfileSoapOut">
+    <wsdl:part name="parameters" element="tns:RevokeApplicationProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetApplicationFeatureSoapIn">
+    <wsdl:part name="parameters" element="tns:SetApplicationFeature" />
+  </wsdl:message>
+  <wsdl:message name="SetApplicationFeatureSoapOut">
+    <wsdl:part name="parameters" element="tns:SetApplicationFeatureResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRulesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRules" />
+  </wsdl:message>
+  <wsdl:message name="GetRulesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRulesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetUserGroupsSoapIn">
+    <wsdl:part name="parameters" element="tns:SetUserGroups" />
+  </wsdl:message>
+  <wsdl:message name="SetUserGroupsSoapOut">
+    <wsdl:part name="parameters" element="tns:SetUserGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGroupData" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGroupDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActivateUserByTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:ActivateUserByToken" />
+  </wsdl:message>
+  <wsdl:message name="ActivateUserByTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:ActivateUserByTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReferenceData" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReferenceDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCodeVersionHttpGetIn" />
+  <wsdl:message name="GetCodeVersionHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetCodeVersionResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAuthenticationHttpGetIn">
+    <wsdl:part name="userId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAuthenticationHttpGetOut">
+    <wsdl:part name="Body" element="tns:QueryUserAuthenticationResult" />
+  </wsdl:message>
+  <wsdl:message name="KeepAliveHttpGetIn">
+    <wsdl:part name="sessionID" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KeepAliveHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="OpenSessionHttpGetIn">
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="federatedSessionId" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="ipAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OpenSessionHttpGetOut">
+    <wsdl:part name="Body" element="tns:OpenSessionResult" />
+  </wsdl:message>
+  <wsdl:message name="ReuseSessionHttpGetIn">
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="parentSessionId" type="s:string" />
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="ipAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReuseSessionHttpGetOut">
+    <wsdl:part name="Body" element="tns:OpenSessionResult" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDataHttpGetIn">
+    <wsdl:part name="user" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetUserDataResult" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDataHttpGetIn">
+    <wsdl:part name="accountNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetAccountDataResult" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionDataHttpGetIn">
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetSessionDataResult" />
+  </wsdl:message>
+  <wsdl:message name="CloseSessionHttpGetIn">
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CloseSessionHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="GetAttributeValuesHttpGetIn">
+    <wsdl:part name="sessionId" type="s:string" />
+    <wsdl:part name="attributeMask" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttributeValuesHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetAttributeValuesResult" />
+  </wsdl:message>
+  <wsdl:message name="SetUserAccountsHttpGetIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="forAccountNumber" type="s:string" />
+    <wsdl:part name="changeClientAccount" type="s:string" />
+    <wsdl:part name="clientAccount" type="s:string" />
+    <wsdl:part name="changeServiceAccount" type="s:string" />
+    <wsdl:part name="serviceAccount" type="s:string" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetUserAccountsHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="RevokeApplicationProfileHttpGetIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="forAccountNumber" type="s:string" />
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RevokeApplicationProfileHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="SetApplicationFeatureHttpGetIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="enableFeatureList" type="s1:StringArray" />
+    <wsdl:part name="disableFeatureList" type="s1:StringArray" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetApplicationFeatureHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="GetRulesHttpGetIn">
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="transactionType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRulesHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetRulesResult" />
+  </wsdl:message>
+  <wsdl:message name="SetUserGroupsHttpGetIn">
+    <wsdl:part name="userid" type="s:string" />
+    <wsdl:part name="addGroupList" type="s1:StringArray" />
+    <wsdl:part name="removeGroupList" type="s1:StringArray" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetUserGroupsHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDataHttpGetIn">
+    <wsdl:part name="groupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetGroupDataResult" />
+  </wsdl:message>
+  <wsdl:message name="ActivateUserByTokenHttpGetIn">
+    <wsdl:part name="token" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="sessionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ActivateUserByTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActivateUserByTokenResult" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceDataHttpGetIn">
+    <wsdl:part name="dataType" type="s:string" />
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="profile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:GetReferenceDataResult" />
+  </wsdl:message>
+  <wsdl:message name="GetCodeVersionHttpPostIn" />
+  <wsdl:message name="GetCodeVersionHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetCodeVersionResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAuthenticationHttpPostIn">
+    <wsdl:part name="userId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAuthenticationHttpPostOut">
+    <wsdl:part name="Body" element="tns:QueryUserAuthenticationResult" />
+  </wsdl:message>
+  <wsdl:message name="KeepAliveHttpPostIn">
+    <wsdl:part name="sessionID" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KeepAliveHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="OpenSessionHttpPostIn">
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="federatedSessionId" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="ipAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OpenSessionHttpPostOut">
+    <wsdl:part name="Body" element="tns:OpenSessionResult" />
+  </wsdl:message>
+  <wsdl:message name="ReuseSessionHttpPostIn">
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="parentSessionId" type="s:string" />
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="ipAddress" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ReuseSessionHttpPostOut">
+    <wsdl:part name="Body" element="tns:OpenSessionResult" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDataHttpPostIn">
+    <wsdl:part name="user" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetUserDataResult" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDataHttpPostIn">
+    <wsdl:part name="accountNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetAccountDataResult" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionDataHttpPostIn">
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetSessionDataResult" />
+  </wsdl:message>
+  <wsdl:message name="CloseSessionHttpPostIn">
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CloseSessionHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="GetAttributeValuesHttpPostIn">
+    <wsdl:part name="sessionId" type="s:string" />
+    <wsdl:part name="attributeMask" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAttributeValuesHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetAttributeValuesResult" />
+  </wsdl:message>
+  <wsdl:message name="SetUserAccountsHttpPostIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="forAccountNumber" type="s:string" />
+    <wsdl:part name="changeClientAccount" type="s:string" />
+    <wsdl:part name="clientAccount" type="s:string" />
+    <wsdl:part name="changeServiceAccount" type="s:string" />
+    <wsdl:part name="serviceAccount" type="s:string" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetUserAccountsHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="RevokeApplicationProfileHttpPostIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="forAccountNumber" type="s:string" />
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RevokeApplicationProfileHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="SetApplicationFeatureHttpPostIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="enableFeatureList" type="s1:StringArray" />
+    <wsdl:part name="disableFeatureList" type="s1:StringArray" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetApplicationFeatureHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="GetRulesHttpPostIn">
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="transactionType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRulesHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetRulesResult" />
+  </wsdl:message>
+  <wsdl:message name="SetUserGroupsHttpPostIn">
+    <wsdl:part name="userid" type="s:string" />
+    <wsdl:part name="addGroupList" type="s1:StringArray" />
+    <wsdl:part name="removeGroupList" type="s1:StringArray" />
+    <wsdl:part name="sessionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetUserGroupsHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserManagementResult" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDataHttpPostIn">
+    <wsdl:part name="groupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetGroupDataResult" />
+  </wsdl:message>
+  <wsdl:message name="ActivateUserByTokenHttpPostIn">
+    <wsdl:part name="token" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="sessionID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ActivateUserByTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActivateUserByTokenResult" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceDataHttpPostIn">
+    <wsdl:part name="dataType" type="s:string" />
+    <wsdl:part name="application" type="s:string" />
+    <wsdl:part name="profile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetReferenceDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:GetReferenceDataResult" />
+  </wsdl:message>
+  <wsdl:portType name="UserManagementSoap">
+    <wsdl:operation name="GetCodeVersion">
+      <wsdl:input message="tns:GetCodeVersionSoapIn" />
+      <wsdl:output message="tns:GetCodeVersionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientHistory">
+      <wsdl:input message="tns:GetClientHistorySoapIn" />
+      <wsdl:output message="tns:GetClientHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAuthentication">
+      <wsdl:input message="tns:QueryUserAuthenticationSoapIn" />
+      <wsdl:output message="tns:QueryUserAuthenticationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KeepAlive">
+      <wsdl:input message="tns:KeepAliveSoapIn" />
+      <wsdl:output message="tns:KeepAliveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenSession">
+      <wsdl:input message="tns:OpenSessionSoapIn" />
+      <wsdl:output message="tns:OpenSessionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReuseSession">
+      <wsdl:input message="tns:ReuseSessionSoapIn" />
+      <wsdl:output message="tns:ReuseSessionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserData">
+      <wsdl:input message="tns:GetUserDataSoapIn" />
+      <wsdl:output message="tns:GetUserDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountData">
+      <wsdl:input message="tns:GetAccountDataSoapIn" />
+      <wsdl:output message="tns:GetAccountDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionData">
+      <wsdl:input message="tns:GetSessionDataSoapIn" />
+      <wsdl:output message="tns:GetSessionDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <wsdl:input message="tns:CloseSessionSoapIn" />
+      <wsdl:output message="tns:CloseSessionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttributeValues">
+      <wsdl:input message="tns:GetAttributeValuesSoapIn" />
+      <wsdl:output message="tns:GetAttributeValuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:input message="tns:CreateUserSoapIn" />
+      <wsdl:output message="tns:CreateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserEx">
+      <wsdl:input message="tns:CreateUserExSoapIn" />
+      <wsdl:output message="tns:CreateUserExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserStatus">
+      <wsdl:input message="tns:SetUserStatusSoapIn" />
+      <wsdl:output message="tns:SetUserStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserAccounts">
+      <wsdl:input message="tns:SetUserAccountsSoapIn" />
+      <wsdl:output message="tns:SetUserAccountsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <wsdl:input message="tns:UpdateAccountSoapIn" />
+      <wsdl:output message="tns:UpdateAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input message="tns:UpdateUserSoapIn" />
+      <wsdl:output message="tns:UpdateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GrantApplicationProfile">
+      <wsdl:input message="tns:GrantApplicationProfileSoapIn" />
+      <wsdl:output message="tns:GrantApplicationProfileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeApplicationProfile">
+      <wsdl:input message="tns:RevokeApplicationProfileSoapIn" />
+      <wsdl:output message="tns:RevokeApplicationProfileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetApplicationFeature">
+      <wsdl:input message="tns:SetApplicationFeatureSoapIn" />
+      <wsdl:output message="tns:SetApplicationFeatureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRules">
+      <wsdl:input message="tns:GetRulesSoapIn" />
+      <wsdl:output message="tns:GetRulesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserGroups">
+      <wsdl:input message="tns:SetUserGroupsSoapIn" />
+      <wsdl:output message="tns:SetUserGroupsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupData">
+      <wsdl:input message="tns:GetGroupDataSoapIn" />
+      <wsdl:output message="tns:GetGroupDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivateUserByToken">
+      <wsdl:input message="tns:ActivateUserByTokenSoapIn" />
+      <wsdl:output message="tns:ActivateUserByTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceData">
+      <wsdl:input message="tns:GetReferenceDataSoapIn" />
+      <wsdl:output message="tns:GetReferenceDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UserManagementHttpGet">
+    <wsdl:operation name="GetCodeVersion">
+      <wsdl:input message="tns:GetCodeVersionHttpGetIn" />
+      <wsdl:output message="tns:GetCodeVersionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAuthentication">
+      <wsdl:input message="tns:QueryUserAuthenticationHttpGetIn" />
+      <wsdl:output message="tns:QueryUserAuthenticationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KeepAlive">
+      <wsdl:input message="tns:KeepAliveHttpGetIn" />
+      <wsdl:output message="tns:KeepAliveHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenSession">
+      <wsdl:input message="tns:OpenSessionHttpGetIn" />
+      <wsdl:output message="tns:OpenSessionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReuseSession">
+      <wsdl:input message="tns:ReuseSessionHttpGetIn" />
+      <wsdl:output message="tns:ReuseSessionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserData">
+      <wsdl:input message="tns:GetUserDataHttpGetIn" />
+      <wsdl:output message="tns:GetUserDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountData">
+      <wsdl:input message="tns:GetAccountDataHttpGetIn" />
+      <wsdl:output message="tns:GetAccountDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionData">
+      <wsdl:input message="tns:GetSessionDataHttpGetIn" />
+      <wsdl:output message="tns:GetSessionDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <wsdl:input message="tns:CloseSessionHttpGetIn" />
+      <wsdl:output message="tns:CloseSessionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttributeValues">
+      <wsdl:input message="tns:GetAttributeValuesHttpGetIn" />
+      <wsdl:output message="tns:GetAttributeValuesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserAccounts">
+      <wsdl:input message="tns:SetUserAccountsHttpGetIn" />
+      <wsdl:output message="tns:SetUserAccountsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeApplicationProfile">
+      <wsdl:input message="tns:RevokeApplicationProfileHttpGetIn" />
+      <wsdl:output message="tns:RevokeApplicationProfileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetApplicationFeature">
+      <wsdl:input message="tns:SetApplicationFeatureHttpGetIn" />
+      <wsdl:output message="tns:SetApplicationFeatureHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRules">
+      <wsdl:input message="tns:GetRulesHttpGetIn" />
+      <wsdl:output message="tns:GetRulesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserGroups">
+      <wsdl:input message="tns:SetUserGroupsHttpGetIn" />
+      <wsdl:output message="tns:SetUserGroupsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupData">
+      <wsdl:input message="tns:GetGroupDataHttpGetIn" />
+      <wsdl:output message="tns:GetGroupDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivateUserByToken">
+      <wsdl:input message="tns:ActivateUserByTokenHttpGetIn" />
+      <wsdl:output message="tns:ActivateUserByTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceData">
+      <wsdl:input message="tns:GetReferenceDataHttpGetIn" />
+      <wsdl:output message="tns:GetReferenceDataHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UserManagementHttpPost">
+    <wsdl:operation name="GetCodeVersion">
+      <wsdl:input message="tns:GetCodeVersionHttpPostIn" />
+      <wsdl:output message="tns:GetCodeVersionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAuthentication">
+      <wsdl:input message="tns:QueryUserAuthenticationHttpPostIn" />
+      <wsdl:output message="tns:QueryUserAuthenticationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KeepAlive">
+      <wsdl:input message="tns:KeepAliveHttpPostIn" />
+      <wsdl:output message="tns:KeepAliveHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenSession">
+      <wsdl:input message="tns:OpenSessionHttpPostIn" />
+      <wsdl:output message="tns:OpenSessionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReuseSession">
+      <wsdl:input message="tns:ReuseSessionHttpPostIn" />
+      <wsdl:output message="tns:ReuseSessionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserData">
+      <wsdl:input message="tns:GetUserDataHttpPostIn" />
+      <wsdl:output message="tns:GetUserDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountData">
+      <wsdl:input message="tns:GetAccountDataHttpPostIn" />
+      <wsdl:output message="tns:GetAccountDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionData">
+      <wsdl:input message="tns:GetSessionDataHttpPostIn" />
+      <wsdl:output message="tns:GetSessionDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <wsdl:input message="tns:CloseSessionHttpPostIn" />
+      <wsdl:output message="tns:CloseSessionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttributeValues">
+      <wsdl:input message="tns:GetAttributeValuesHttpPostIn" />
+      <wsdl:output message="tns:GetAttributeValuesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserAccounts">
+      <wsdl:input message="tns:SetUserAccountsHttpPostIn" />
+      <wsdl:output message="tns:SetUserAccountsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeApplicationProfile">
+      <wsdl:input message="tns:RevokeApplicationProfileHttpPostIn" />
+      <wsdl:output message="tns:RevokeApplicationProfileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetApplicationFeature">
+      <wsdl:input message="tns:SetApplicationFeatureHttpPostIn" />
+      <wsdl:output message="tns:SetApplicationFeatureHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRules">
+      <wsdl:input message="tns:GetRulesHttpPostIn" />
+      <wsdl:output message="tns:GetRulesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetUserGroups">
+      <wsdl:input message="tns:SetUserGroupsHttpPostIn" />
+      <wsdl:output message="tns:SetUserGroupsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupData">
+      <wsdl:input message="tns:GetGroupDataHttpPostIn" />
+      <wsdl:output message="tns:GetGroupDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActivateUserByToken">
+      <wsdl:input message="tns:ActivateUserByTokenHttpPostIn" />
+      <wsdl:output message="tns:ActivateUserByTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceData">
+      <wsdl:input message="tns:GetReferenceDataHttpPostIn" />
+      <wsdl:output message="tns:GetReferenceDataHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserManagementSoap" type="tns:UserManagementSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCodeVersion">
+      <soap:operation soapAction="http://www.zon.pt/GetCodeVersion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientHistory">
+      <soap:operation soapAction="http://www.zon.pt/GetClientHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAuthentication">
+      <soap:operation soapAction="http://www.zon.pt/QueryUserAuthentication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeepAlive">
+      <soap:operation soapAction="http://www.zon.pt/KeepAlive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenSession">
+      <soap:operation soapAction="http://www.zon.pt/OpenSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReuseSession">
+      <soap:operation soapAction="http://www.zon.pt/ReuseSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserData">
+      <soap:operation soapAction="http://www.zon.pt/GetUserData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountData">
+      <soap:operation soapAction="http://www.zon.pt/GetAccountData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionData">
+      <soap:operation soapAction="http://www.zon.pt/GetSessionData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <soap:operation soapAction="http://www.zon.pt/CloseSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttributeValues">
+      <soap:operation soapAction="http://www.zon.pt/GetAttributeValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://www.zon.pt/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserEx">
+      <soap:operation soapAction="http://www.zon.pt/CreateUserEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserStatus">
+      <soap:operation soapAction="http://www.zon.pt/SetUserStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserAccounts">
+      <soap:operation soapAction="http://www.zon.pt/SetUserAccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <soap:operation soapAction="http://www.zon.pt/UpdateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://www.zon.pt/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GrantApplicationProfile">
+      <soap:operation soapAction="http://www.zon.pt/GrantApplicationProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeApplicationProfile">
+      <soap:operation soapAction="http://www.zon.pt/RevokeApplicationProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetApplicationFeature">
+      <soap:operation soapAction="http://www.zon.pt/SetApplicationFeature" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRules">
+      <soap:operation soapAction="http://www.zon.pt/GetRules" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserGroups">
+      <soap:operation soapAction="http://www.zon.pt/SetUserGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupData">
+      <soap:operation soapAction="http://www.zon.pt/GetGroupData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateUserByToken">
+      <soap:operation soapAction="http://www.zon.pt/ActivateUserByToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceData">
+      <soap:operation soapAction="http://www.zon.pt/GetReferenceData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserManagementSoap12" type="tns:UserManagementSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCodeVersion">
+      <soap12:operation soapAction="http://www.zon.pt/GetCodeVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientHistory">
+      <soap12:operation soapAction="http://www.zon.pt/GetClientHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAuthentication">
+      <soap12:operation soapAction="http://www.zon.pt/QueryUserAuthentication" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeepAlive">
+      <soap12:operation soapAction="http://www.zon.pt/KeepAlive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenSession">
+      <soap12:operation soapAction="http://www.zon.pt/OpenSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReuseSession">
+      <soap12:operation soapAction="http://www.zon.pt/ReuseSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserData">
+      <soap12:operation soapAction="http://www.zon.pt/GetUserData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountData">
+      <soap12:operation soapAction="http://www.zon.pt/GetAccountData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionData">
+      <soap12:operation soapAction="http://www.zon.pt/GetSessionData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <soap12:operation soapAction="http://www.zon.pt/CloseSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttributeValues">
+      <soap12:operation soapAction="http://www.zon.pt/GetAttributeValues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap12:operation soapAction="http://www.zon.pt/CreateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserEx">
+      <soap12:operation soapAction="http://www.zon.pt/CreateUserEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserStatus">
+      <soap12:operation soapAction="http://www.zon.pt/SetUserStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserAccounts">
+      <soap12:operation soapAction="http://www.zon.pt/SetUserAccounts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <soap12:operation soapAction="http://www.zon.pt/UpdateAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap12:operation soapAction="http://www.zon.pt/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GrantApplicationProfile">
+      <soap12:operation soapAction="http://www.zon.pt/GrantApplicationProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeApplicationProfile">
+      <soap12:operation soapAction="http://www.zon.pt/RevokeApplicationProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetApplicationFeature">
+      <soap12:operation soapAction="http://www.zon.pt/SetApplicationFeature" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRules">
+      <soap12:operation soapAction="http://www.zon.pt/GetRules" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserGroups">
+      <soap12:operation soapAction="http://www.zon.pt/SetUserGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupData">
+      <soap12:operation soapAction="http://www.zon.pt/GetGroupData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateUserByToken">
+      <soap12:operation soapAction="http://www.zon.pt/ActivateUserByToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceData">
+      <soap12:operation soapAction="http://www.zon.pt/GetReferenceData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserManagementHttpGet" type="tns:UserManagementHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetCodeVersion">
+      <http:operation location="/GetCodeVersion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAuthentication">
+      <http:operation location="/QueryUserAuthentication" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeepAlive">
+      <http:operation location="/KeepAlive" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenSession">
+      <http:operation location="/OpenSession" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReuseSession">
+      <http:operation location="/ReuseSession" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserData">
+      <http:operation location="/GetUserData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountData">
+      <http:operation location="/GetAccountData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionData">
+      <http:operation location="/GetSessionData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <http:operation location="/CloseSession" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttributeValues">
+      <http:operation location="/GetAttributeValues" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserAccounts">
+      <http:operation location="/SetUserAccounts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeApplicationProfile">
+      <http:operation location="/RevokeApplicationProfile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetApplicationFeature">
+      <http:operation location="/SetApplicationFeature" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRules">
+      <http:operation location="/GetRules" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserGroups">
+      <http:operation location="/SetUserGroups" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupData">
+      <http:operation location="/GetGroupData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateUserByToken">
+      <http:operation location="/ActivateUserByToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceData">
+      <http:operation location="/GetReferenceData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UserManagementHttpPost" type="tns:UserManagementHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetCodeVersion">
+      <http:operation location="/GetCodeVersion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAuthentication">
+      <http:operation location="/QueryUserAuthentication" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeepAlive">
+      <http:operation location="/KeepAlive" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenSession">
+      <http:operation location="/OpenSession" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReuseSession">
+      <http:operation location="/ReuseSession" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserData">
+      <http:operation location="/GetUserData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountData">
+      <http:operation location="/GetAccountData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionData">
+      <http:operation location="/GetSessionData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <http:operation location="/CloseSession" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttributeValues">
+      <http:operation location="/GetAttributeValues" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserAccounts">
+      <http:operation location="/SetUserAccounts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeApplicationProfile">
+      <http:operation location="/RevokeApplicationProfile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetApplicationFeature">
+      <http:operation location="/SetApplicationFeature" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRules">
+      <http:operation location="/GetRules" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetUserGroups">
+      <http:operation location="/SetUserGroups" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupData">
+      <http:operation location="/GetGroupData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActivateUserByToken">
+      <http:operation location="/ActivateUserByToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceData">
+      <http:operation location="/GetReferenceData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserManagement">
+    <wsdl:port name="UserManagementSoap" binding="tns:UserManagementSoap">
+      <soap:address location="http://10.154.5.39/usermanagement/usermanagement.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserManagementSoap12" binding="tns:UserManagementSoap12">
+      <soap12:address location="http://10.154.5.39/usermanagement/usermanagement.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserManagementHttpGet" binding="tns:UserManagementHttpGet">
+      <http:address location="http://10.154.5.39/usermanagement/usermanagement.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UserManagementHttpPost" binding="tns:UserManagementHttpPost">
+      <http:address location="http://10.154.5.39/usermanagement/usermanagement.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

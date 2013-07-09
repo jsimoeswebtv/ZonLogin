@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0e2b4d9350d84571969efc7cd7acee76" Name="Diagram1">
+        <EntityTypeShape EntityType="ZonLoginModel.Clients" Width="1.5" PointX="4.727977604012926" PointY="18.217798777957352" />
+        <EntityTypeShape EntityType="ZonLoginModel.Webpages_clients" Width="1.5" PointX="8.5662009755923414" PointY="13.979274398637598" />
+        <AssociationConnector Association="ZonLoginModel.FK_Webpages_clients_Clients" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

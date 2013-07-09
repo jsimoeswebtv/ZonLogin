@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Authorize";
+}
+
+
+
+<hgroup class="title">
+        <h1>@ViewBag.Title</h1>
+    <br />
+        <h2>The application @ViewBag.lblApplicationHostname is requesting you the following permissions:</h2>
+    </hgroup>
+    <article>        
+        <ul>
+            <li> @ViewBag.lblAuthorizationScope</li>
+        </ul>            
+        <p>
+            @using (Html.BeginForm("Allow", "Authorize"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div>
+                                @Html.Hidden("client_id", (object)ViewBag.client_id)
+                                @Html.Hidden("Scope", (object)ViewBag.lblAuthorizationScope)
+                                @Html.Hidden("RedirectUri",(object) ViewBag.redirec_uri)
+                                @Html.Hidden("state",(object)ViewBag.state)
+                                <input type="submit" value="Allow" title="Add this @ViewBag.lblApplicationHostname to your account" />
+                                <input type="button" title="Deny" value="Deny" onclick="location.href='@Url.Action("Deny", "Authorize", new { id =  ViewBag.client_id })    '" />
+                            </div>
+                        }
+
+
+
+            
+            
+        </p>
+    </article>

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ZonLoginModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ZonLoginModelStoreContainer">
+          <EntitySet Name="Clients" EntityType="ZonLoginModel.Store.Clients" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Webpages_clients" EntityType="ZonLoginModel.Store.Webpages_clients" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Webpages_clients_Clients" Association="ZonLoginModel.Store.FK_Webpages_clients_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Webpages_clients" EntitySet="Webpages_clients" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="clientId" />
+          </Key>
+          <Property Name="clientId" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="appName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Webpages_clients">
+          <Key>
+            <PropertyRef Name="Webpages_clientsId" />
+          </Key>
+          <Property Name="Webpages_clientsId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="clientId" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="authDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Webpages_clients_Clients">
+          <End Role="Clients" Type="ZonLoginModel.Store.Clients" Multiplicity="1" />
+          <End Role="Webpages_clients" Type="ZonLoginModel.Store.Webpages_clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="clientId" />
+            </Principal>
+            <Dependent Role="Webpages_clients">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZonLoginModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ZonLoginEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="ZonLoginModel.Clients" />
+          <EntitySet Name="Webpages_clients" EntityType="ZonLoginModel.Webpages_clients" />
+          <AssociationSet Name="FK_Webpages_clients_Clients" Association="ZonLoginModel.FK_Webpages_clients_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Webpages_clients" EntitySet="Webpages_clients" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="clientId" />
+          </Key>
+          <Property Type="String" Name="clientId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="appName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Webpages_clients" Relationship="ZonLoginModel.FK_Webpages_clients_Clients" FromRole="Clients" ToRole="Webpages_clients" />
+        </EntityType>
+        <EntityType Name="Webpages_clients">
+          <Key>
+            <PropertyRef Name="Webpages_clientsId" />
+          </Key>
+          <Property Type="Int32" Name="Webpages_clientsId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="userId" Nullable="false" />
+          <Property Type="String" Name="clientId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="authDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clients" Relationship="ZonLoginModel.FK_Webpages_clients_Clients" FromRole="Webpages_clients" ToRole="Clients" />
+        </EntityType>
+        <Association Name="FK_Webpages_clients_Clients">
+          <End Type="ZonLoginModel.Clients" Role="Clients" Multiplicity="1" />
+          <End Type="ZonLoginModel.Webpages_clients" Role="Webpages_clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="clientId" />
+            </Principal>
+            <Dependent Role="Webpages_clients">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ZonLoginModelStoreContainer" CdmEntityContainer="ZonLoginEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ZonLoginModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="appName" ColumnName="appName" />
+                <ScalarProperty Name="clientId" ColumnName="clientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Webpages_clients">
+            <EntityTypeMapping TypeName="ZonLoginModel.Webpages_clients">
+              <MappingFragment StoreEntitySet="Webpages_clients">
+                <ScalarProperty Name="authDate" ColumnName="authDate" />
+                <ScalarProperty Name="clientId" ColumnName="clientId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="Webpages_clientsId" ColumnName="Webpages_clientsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
